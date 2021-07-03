@@ -12,36 +12,31 @@ class Solution
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    vector<int> vec;
-	    int ind_deg[V];
-	    for(int i=0; i<V; i++){
-	        for(int j=1; j<adj[i].size(); j++){
-	            ind_deg[adj[i][j]]++;
-	        }
+	    // code here
+	    vector<int>v;
+	    int in[V]={0};
+	    for(int i=0;i<V;i++)
+	    {
+	    	    for(auto j:adj[i])
+	        in[j]++;
 	    }
-	    queue<int> q;
-	    for(int i=0; i<V; i++){
-	        if(ind_deg[i]==0){
+	    queue<int>q;
+	    for(int i=0;i<V;i++)
+	    if(in[i]==0)q.push(i);
+	    while(!q.empty())
+	    {
+	        int x=q.front();
+	        v.push_back(x);
+	        q.pop();
+	        for(auto i:adj[x])
+	        {
+	            in[i]--;
+	            if(in[i]==0)
 	            q.push(i);
 	        }
 	    }
-	    
-	    while(!q.empty()){
-	       // cnt++;
-	        
-	        int x  = q.front();
-	        q.pop();
-	        vec.push_back(x);
-	        for(auto it: adj[x]){
-	            ind_deg[it]--;
-	            if(ind_deg[it]==0){
-	                q.push(it);
-	            }
-	        }
-	    }
-	    return vec;
+	    return v;
 	}
-	
 };
 
 // { Driver Code Starts.
