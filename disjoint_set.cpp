@@ -22,7 +22,8 @@ void union(fromP, toP){
 
 isCycle(vector<pair<int, int>> edge_list){
     
-    for(int p: edge_list){
+    psir<int, int > p;
+    for( p: edge_list){
         
         int fromP = find(p.first);
         int toP = find(p.second);
